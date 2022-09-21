@@ -1,0 +1,243 @@
+﻿<Window x:Class="ChaosGalaxyProfileMaker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChaosGalaxyProfileMaker"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        KeyUp="Window_KeyUp"
+        MouseDown="Window_MouseDown"
+        SizeToContent="WidthAndHeight"
+        Title="Chaos Galaxy Profile Maker">
+    <Window.Resources>
+        <ResourceDictionary Source="Resources/Dictionary1.xaml">
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <StackPanel
+                Width="600">
+
+        <Border BorderBrush="Black"
+                   
+                BorderThickness="2,2,2,0"
+                Background="#b3b9d1">
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Margin="4"
+                           Width="560"
+                           TextWrapping="Wrap"
+                           FontWeight="ExtraBold"
+                           Text="Chaos Galaxy Profile Maker" />
+
+                <local:CloseButton Content="X"
+                                   Click="OnClickDismiss"
+                                   ClickMode="Release"
+                                   
+                                   VerticalAlignment="Center" />
+
+            </StackPanel>
+
+        </Border>
+        <Border BorderBrush="Black"
+                BorderThickness="2,2,2,0"
+                >
+            <Grid 
+                        Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="edit_btn"
+                            Content="Edit .cgpm (D)"
+                            Click="OnClickEdit"
+                            ClickMode="Release"
+                            FontWeight="Bold"
+                            Width="120"
+                            HorizontalAlignment="Center" />
+                <Button x:Name="save_btn" Grid.Column="1"
+                            Content="Save to .cgpm (S)"
+                            Click="OnClickSave"
+                            ClickMode="Release"
+                            FontWeight="Bold"
+                            Width="120"
+                            HorizontalAlignment="Center" />
+                <Button x:Name="export_btn" Grid.Column="2"
+                            Content="Export to .JPG (V)"
+                            Click="OnClickExport"
+                            ClickMode="Release"
+                            FontWeight="Bold"
+                            Width="120"
+                            HorizontalAlignment="Center" />
+            </Grid>
+
+        </Border>
+        <Border BorderBrush="Black"
+                BorderThickness="2"
+                >
+            <Grid 
+                        x:Name="BottomRoot"
+                        Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel x:Name="LeftRoot" 
+                            >
+                    <Button x:Name="portrait_btn"
+                            Content="Hero Portrait (240x200)"
+                            Click="OnClickPortrait"
+                            ClickMode="Release"
+                            FontWeight="Bold"
+                            Margin="2"
+                            Width="180"
+                            HorizontalAlignment="Center" />
+                    <DockPanel Margin="0 2">
+                        <TextBlock 
+                           FontWeight="Bold"
+                           TextWrapping="Wrap"
+                           Text="Name " />
+                        <TextBox MaxLength="80" Name="text_box_name_hero" />
+                    </DockPanel>
+                    <TextBlock Margin="0 2"
+                       FontWeight="Bold"
+                       TextWrapping="Wrap"
+                       Text="Story (800 characters max)" />
+                    <TextBox MaxLength="800" Height="80" AcceptsReturn="True" TextWrapping="Wrap" Name="text_box_story_hero"/>
+                    <DockPanel Margin="0 2">
+
+                        <TextBlock 
+                       FontWeight="Bold"
+                       TextWrapping="Wrap"
+                       Text="Stats" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="  M: " />
+                            <TextBox Width="20" Name="text_box_military_hero" PreviewTextInput="NumberValidationTextBox" MaxLength="2" />
+                            <TextBlock Text="  I: " />
+                            <TextBox Width="20" Name="text_box_intellect_hero" PreviewTextInput="NumberValidationTextBox" MaxLength="2" />
+                            <TextBlock Text="  A: " />
+                            <TextBox Width="20" Name="text_box_admin_hero" PreviewTextInput="NumberValidationTextBox" MaxLength="2" />
+                            <TextBlock Text="  C: " />
+                            <TextBox Width="20" Name="text_box_character_hero" PreviewTextInput="NumberValidationTextBox" MaxLength="2" />
+                        </StackPanel>
+                    </DockPanel>
+                    <TextBlock Margin="0 2"
+                       FontWeight="Bold"
+                       TextWrapping="Wrap"
+                       Text="Conditions for recruit" />
+                    <TextBox MaxLength="800" Height="40" Name="text_box_conditions_hero" AcceptsReturn="True" TextWrapping="Wrap" />
+                    <DockPanel Margin="0 2">
+                        <TextBlock 
+                           FontWeight="Bold"
+                           TextWrapping="Wrap"
+                           Text="Talent " />
+                        <TextBox MaxLength="160" Name="text_box_talent_hero" />
+                    </DockPanel>
+                    <DockPanel Margin="0 2">
+                        <TextBlock 
+                           FontWeight="Bold"
+                           TextWrapping="Wrap"
+                           Text="Strategy " />
+                        <TextBox MaxLength="160" Name="text_box_strategy_hero"/>
+                    </DockPanel>
+                    <DockPanel Margin="0 2">
+                        <TextBlock 
+                           FontWeight="Bold"
+                           TextWrapping="Wrap"
+                           Text="Tactics " />
+                        <TextBox MaxLength="160" Name="text_box_tactics_hero"/>
+                    </DockPanel>
+
+                </StackPanel>
+                <StackPanel x:Name="RightRoot" Grid.Column="1"
+                            Margin="5,0,0,0">
+                    <Button x:Name="unit_btn"
+                            Content="Hero Unit (128x64)"
+                            FontWeight="Bold"
+                            Click="OnClickUnit"
+                            ClickMode="Release"
+                            Margin="2"
+                            Width="170"
+                            HorizontalAlignment="Center" />
+                    <DockPanel Margin="0 2">
+                        <TextBlock 
+                           FontWeight="Bold"
+                           TextWrapping="Wrap"
+                           Text="Name " />
+                        <TextBox MaxLength="80" Name="text_box_name_unit"/>
+                    </DockPanel>
+                    <DockPanel Margin="0 2">
+                        <TextBlock 
+                           FontWeight="Bold"
+                           TextWrapping="Wrap"
+                           Text="Type " />
+                        <TextBox MaxLength="120" Name="text_box_type_unit"/>
+                    </DockPanel>
+                    <TextBlock Margin="0 2"
+                       FontWeight="Bold"
+                       TextWrapping="Wrap"
+                       Text="Weapons" />
+                    <TextBox MaxLines="1" Name="text_box_weapons_unit_1"/>
+                    <TextBox MaxLines="1" Name="text_box_weapons_unit_2"/>
+                    <TextBox MaxLines="1" Name="text_box_weapons_unit_3"/>
+                    <TextBlock Margin="0 2"
+                       FontWeight="Bold"
+                       TextWrapping="Wrap"
+                       Text="Shield" />
+                    <TextBox MaxLength="120" Name="text_box_shield_unit"/>
+                    <TextBlock Margin="0 2"
+                       FontWeight="Bold"
+                       TextWrapping="Wrap"
+                       Text="Abilities" />
+                    <TextBox MaxLines="1" Name="text_box_abilities_unit_1"/>
+                    <TextBox MaxLines="1" Name="text_box_abilities_unit_2"/>
+                    <TextBox MaxLines="1" Name="text_box_abilities_unit_3"/>
+                    <DockPanel Margin="0 2">
+                        <TextBlock 
+                           FontWeight="Bold"
+                           TextWrapping="Wrap"
+                           Text="Power " />
+                        <TextBox MaxLength="160" PreviewTextInput="NumberValidationTextBox"  Name="text_box_power_unit"/>
+                    </DockPanel>
+                    <DockPanel Margin="0 2">
+                        <TextBlock 
+                           FontWeight="Bold"
+                           TextWrapping="Wrap"
+                           Text="Energy " />
+                        <TextBox MaxLength="160" PreviewTextInput="NumberValidationTextBox" Name="text_box_energy_unit"/>
+                    </DockPanel>
+                    <DockPanel Margin="0 2">
+                        <TextBlock 
+                           FontWeight="Bold"
+                           TextWrapping="Wrap"
+                           Text="Agility " />
+                        <TextBox MaxLength="160" PreviewTextInput="NumberValidationTextBox" Name="text_box_agility_unit"/>
+                    </DockPanel>
+                    <DockPanel Margin="0 2">
+                        <TextBlock 
+                           FontWeight="Bold"
+                           TextWrapping="Wrap"
+                           Text="Movement " />
+                        <TextBox MaxLength="160" PreviewTextInput="NumberValidationTextBox" Name="text_box_movement_unit"/>
+                    </DockPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border BorderBrush="Black"
+                BorderThickness="2,0,2,2"
+                
+                Background="#b3b9d1"
+              >
+            <TextBlock Margin="2"
+                       FontWeight="Bold"
+                       TextWrapping="Wrap"
+                       Text="Version 1.1 | 22 september 2022 | Ping Snrasha for any feedback, idea or typo." />
+
+        </Border>
+    </StackPanel>
+
+
+
+</Window>
