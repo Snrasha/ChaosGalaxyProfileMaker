@@ -1,9 +1,9 @@
 # Chaos Maker Profile Maker
 Create a formatted page preview of your hero with the unit.
 
-Press D for edit a save of your page preview data.
-Press S for save your page preview data.
-Press V for export it to jpg.
+Press Ctrl+D for edit a save of your page preview data.
+Press Ctrl+S for save your page preview data.
+Press Ctrl+V for export it to jpg.
 
 Fill all field and add the two images.
 

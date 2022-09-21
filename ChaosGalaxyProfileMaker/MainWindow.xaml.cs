@@ -363,15 +363,15 @@ namespace ChaosGalaxyProfileMaker
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
-            if (Keyboard.Modifiers == ModifierKeys.None && e.Key == Key.V)
+            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.V)
             {
                 OnClickExport(null, null);
             }
-            else if (Keyboard.Modifiers == ModifierKeys.None && e.Key == Key.D)
+            else if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.D)
             {
-                OnClickEdit(null, null);
+                OnClickEdit(null, null); 
             }
-            else if (Keyboard.Modifiers == ModifierKeys.None && e.Key == Key.S)
+            else if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.S)
             {
                 OnClickSave(null, null);
             }

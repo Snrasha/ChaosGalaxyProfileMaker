@@ -51,25 +51,25 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Button x:Name="edit_btn"
-                            Content="Edit .cgpm (D)"
+                            Content="Edit .cgpm (Ctrl+D)"
                             Click="OnClickEdit"
                             ClickMode="Release"
                             FontWeight="Bold"
-                            Width="120"
+                            Width="150"
                             HorizontalAlignment="Center" />
                 <Button x:Name="save_btn" Grid.Column="1"
-                            Content="Save to .cgpm (S)"
+                            Content="Save to .cgpm (Ctrl+S)"
                             Click="OnClickSave"
                             ClickMode="Release"
                             FontWeight="Bold"
-                            Width="120"
+                            Width="150"
                             HorizontalAlignment="Center" />
                 <Button x:Name="export_btn" Grid.Column="2"
-                            Content="Export to .JPG (V)"
+                            Content="Export to .JPG (Ctrl+V)"
                             Click="OnClickExport"
                             ClickMode="Release"
                             FontWeight="Bold"
-                            Width="120"
+                            Width="150"
                             HorizontalAlignment="Center" />
             </Grid>
 
@@ -233,7 +233,7 @@
             <TextBlock Margin="2"
                        FontWeight="Bold"
                        TextWrapping="Wrap"
-                       Text="Version 1.1 | 22 september 2022 | Ping Snrasha for any feedback, idea or typo." />
+                       Text="Version 1.1b | 22 september 2022 | Ping Snrasha for any feedback, idea or typo." />
 
         </Border>
     </StackPanel>
