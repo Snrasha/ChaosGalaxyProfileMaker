@@ -154,15 +154,21 @@ namespace ChaosGalaxyProfileMaker
             {
                 //nothing
             }
+            Console.WriteLine(story);
+
+            Font arialFont = new Font("Arial", 10);
+            Font arialFontBold = new Font("Arial", 10, FontStyle.Bold);
+            int heightTxt = TextRenderer.MeasureText("Name", arialFont).Height;
 
             int width = 540;
-            int height = 600;
+            int heightTop = 200;
+
+            int height = heightTop +20+ (heightTxt+5) * (12+CalculateNbLines(new string[] {conditions,story},width/2-12,heightTxt,arialFont));
             int widthRect = 256;
 
 
             Bitmap bitmap = new Bitmap(width, height);
 
-            int heightTop = 200;
 
 
 
@@ -172,18 +178,9 @@ namespace ChaosGalaxyProfileMaker
             Pen penWhite = new Pen(Color.White);
             penWhite.Width = 1;
 
-            //Image background = Properties.Resources.background;
-
             Stream imgStream =Assembly.GetExecutingAssembly().GetManifestResourceStream("ChaosGalaxyProfileMaker.Resources.background.png");
             Image backgroundImg=Image.FromStream(imgStream);
 
-            //for (var x = 0; x < bitmap.Width; x++)
-            //{
-            //    for (var y = 0; y < bitmap.Height; y++)
-            //    {
-            //        bitmap.SetPixel(x, y, background_color);
-            //    }
-            //}
             Rectangle rectsrc, rectdst;
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
@@ -195,18 +192,21 @@ namespace ChaosGalaxyProfileMaker
                 graphics.CompositingQuality = CompositingQuality.HighQuality;
 
                 graphics.Clear(background_color);
+                
+                penBlack.Width = 4;
+                graphics.DrawLine(penBlack, width / 2, 0, width / 2, height);
+                penWhite.Width = 2;
+                graphics.DrawLine(penWhite, width / 2, 0, width / 2, height);
+                penBlack.Width = 2;
+
                 graphics.DrawRectangle(penBlack, 1, 1, bitmap.Width - 2, bitmap.Height - 2);
                 //graphics.FillRectangle(Brushes.White, 6, 6, widthRect, 200);
                 //graphics.FillRectangle(Brushes.White, width - widthRect - 6, 6, widthRect, 200);
 
                 graphics.SmoothingMode = SmoothingMode.HighQuality;
 
-                penBlack.Width = 4;
-                graphics.DrawLine(penBlack, width / 2, 0, width / 2, height);
-                penWhite.Width = 2;
-                graphics.DrawLine(penWhite, width / 2, 0, width / 2, height);
-
-                penBlack.Width = 2;
+         
+                
                 rectsrc = new Rectangle(0, 0, backgroundImg.Width, backgroundImg.Height);
                 rectdst = new Rectangle(6, 6, widthRect, heightTop);
                 graphics.DrawImage(backgroundImg, rectdst, rectsrc, GraphicsUnit.Pixel);
@@ -232,26 +232,24 @@ namespace ChaosGalaxyProfileMaker
                 }
 
                 RectangleF drawRectTxt = new RectangleF(startX, heightTop + 10, width / 2 - 12, 0);
-                Font arialFont = new Font("Arial", 10);
-                Font arialFontBold = new Font("Arial", 10,FontStyle.Bold);
+
                 string[] arrayOfText;
                 penBlack.Width = 1;
 
                 //graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 
-                int heightTxt = TextRenderer.MeasureText("Name", arialFont).Height;
 
                 drawRectTxt.Height = heightTxt;
                 DrawLineMixed("Name: ", nameHero, startX, penBlack, ref drawRectTxt, graphics, arialFont, arialFontBold);
 
                 DrawLineVertical("Story:", startX, ref drawRectTxt, graphics, arialFontBold);
-                drawRectangleOfText(new string[] {story}, heightTxt, penBlack, drawRectTxt, arialFont, graphics);
+                DrawRectangleOfText(new string[] {story}, heightTxt, penBlack, drawRectTxt, arialFont, graphics);
                 DrawLineVertical(story, startX, ref drawRectTxt, graphics, arialFont);
                 drawRectTxt.Y += 6;
 
                 DrawLineVertical("Stats: ", startX, ref drawRectTxt, graphics, arialFontBold);
                 arrayOfText = new string[] { " - Military: " + military, " - Intellect: " + intellect };
-                drawRectangleOfText(arrayOfText, heightTxt, penBlack, drawRectTxt, arialFont, graphics);
+                DrawRectangleOfText(arrayOfText, heightTxt, penBlack, drawRectTxt, arialFont, graphics);
                 DrawLineHorizontal(" Military: ", ref drawRectTxt, graphics, arialFontBold);
                 float savedX = drawRectTxt.X;
                 DrawLineHorizontal(military, ref drawRectTxt, graphics, arialFont);
@@ -274,7 +272,7 @@ namespace ChaosGalaxyProfileMaker
                 DrawLineVertical("Skills:", startX, ref drawRectTxt, graphics, arialFontBold);
 
                 arrayOfText = new string[] { "Talent:", talent, "Strategy:", strategy, "Tactics:", tactics };
-                drawRectangleOfText(arrayOfText, heightTxt, penBlack, drawRectTxt, arialFont, graphics);
+                DrawRectangleOfText(arrayOfText, heightTxt, penBlack, drawRectTxt, arialFont, graphics);
 
                 DrawLineVertical(arrayOfText[0], startX, ref drawRectTxt, graphics, arialFontBold);
                 DrawLineVertical(arrayOfText[1], startX, ref drawRectTxt, graphics, arialFont);
@@ -286,7 +284,7 @@ namespace ChaosGalaxyProfileMaker
 
 
                 DrawLineVertical("Conditions:", startX, ref drawRectTxt, graphics, arialFontBold);
-                drawRectangleOfText(new string[] { conditions }, heightTxt, penBlack, drawRectTxt, arialFont, graphics);
+                DrawRectangleOfText(new string[] { conditions }, heightTxt, penBlack, drawRectTxt, arialFont, graphics);
                 DrawLineVertical(conditions, startX, ref drawRectTxt, graphics, arialFont);
                 drawRectTxt.Y += 6;
 
@@ -297,7 +295,7 @@ namespace ChaosGalaxyProfileMaker
                 DrawLineMixed("Type: ", type, startX, penBlack, ref drawRectTxt, graphics, arialFont, arialFontBold);
 
                 DrawLineVertical("Weapons:", startX, ref drawRectTxt, graphics, arialFontBold);
-                drawRectangleOfText(weapons, heightTxt, penBlack, drawRectTxt, arialFont, graphics);
+                DrawRectangleOfText(weapons, heightTxt, penBlack, drawRectTxt, arialFont, graphics);
                 for (int i = 0; i < weapons.Length; i++)
                 {
                     if (weapons[i]!=null && weapons[i].Trim().Length > 0)
@@ -323,7 +321,7 @@ namespace ChaosGalaxyProfileMaker
                 DrawLineMixed("Shield: ", shieldtxt, startX,penBlack, ref drawRectTxt, graphics, arialFont, arialFontBold);
 
                 DrawLineVertical("Abilities:", startX, ref drawRectTxt, graphics, arialFontBold);
-                drawRectangleOfText(abilities, heightTxt, penBlack, drawRectTxt, arialFont, graphics);
+                DrawRectangleOfText(abilities, heightTxt, penBlack, drawRectTxt, arialFont, graphics);
                 for (int i = 0; i < abilities.Length; i++)
                 {
                     if (abilities[i] != null && abilities[i].Trim().Length > 0)
@@ -336,7 +334,7 @@ namespace ChaosGalaxyProfileMaker
                 arrayOfText = new string[] {  power,  energy, agility,  movement };
                 DrawLineVertical("Stats:", startX, ref drawRectTxt, graphics, arialFontBold);
 
-                drawRectangleOfText(arrayOfText, heightTxt, penBlack, drawRectTxt, arialFont, graphics);
+                DrawRectangleOfText(arrayOfText, heightTxt, penBlack, drawRectTxt, arialFont, graphics);
 
 
                 DrawLineMixed("Power: ", arrayOfText[0], startX, null, ref drawRectTxt, graphics, arialFont, arialFontBold);
@@ -348,15 +346,15 @@ namespace ChaosGalaxyProfileMaker
 
             bitmap.Save(filename);//save the image file
         }
-        private void drawRectangleOfText(string[] arrayOfText,float heightTxt,Pen penBlack,RectangleF drawRectTxt,Font arialFont, Graphics graphics)
+        private void DrawRectangleOfText(string[] arrayOfText,float heightTxt,Pen penBlack,RectangleF drawRectTxt,Font arialFont, Graphics graphics)
         {
-            int nblines = calculateNbLines(arrayOfText, drawRectTxt, arialFont, graphics);
+            int nblines = CalculateNbLines(arrayOfText, drawRectTxt, arialFont, graphics);
             graphics.FillRectangle(Brushes.White, drawRectTxt.X-1 , drawRectTxt.Y, drawRectTxt.Width + 2, heightTxt * nblines + 2);
             graphics.DrawRectangle(penBlack, drawRectTxt.X -1, drawRectTxt.Y, drawRectTxt.Width + 2, heightTxt * nblines + 2);
 
         }
 
-        private int calculateNbLines(string[] texts,RectangleF drawRectTxt, Font arialFont, Graphics graphics)
+        private int CalculateNbLines(string[] texts, RectangleF drawRectTxt, Font arialFont, Graphics graphics)
         {
             int nbLines=0;
             for (int i = 0; i < texts.Length; i++)
@@ -365,11 +363,26 @@ namespace ChaosGalaxyProfileMaker
 
                 nbLines += (int)(size2.Height / drawRectTxt.Height);
                 nbLines += (int)(size2.Width / drawRectTxt.Width);
-                
             }
             return nbLines;
         }
+        private int CalculateNbLines(string[] texts, float widthRect, float heightRect, Font arialFont)
+        {
+            int nbLines = 0;
+            for (int i = 0; i < texts.Length; i++)
+            {
+                Console.WriteLine(texts[i]);
 
+                SizeF size2 = TextRenderer.MeasureText(texts[i], arialFont);
+                Console.WriteLine(size2 + "     " + widthRect + ":" + heightRect);
+
+                nbLines += (int)(size2.Height / heightRect);
+                nbLines += (int)(size2.Width / widthRect);
+                Console.WriteLine(nbLines);
+
+            }
+            return nbLines;
+        }
 
         private void DrawLineMixed(string text1, string text2, int xStart,Pen penBlack, ref RectangleF drawRectTxt, Graphics graphics, Font arialFont, Font arialFontbold)
         {
@@ -393,7 +406,7 @@ namespace ChaosGalaxyProfileMaker
 
             if (penBlack != null)
             {
-                drawRectangleOfText(new string[] { text2 }, size.Height, penBlack, drawRectTxt, arialFont, graphics);
+                DrawRectangleOfText(new string[] { text2 }, size.Height, penBlack, drawRectTxt, arialFont, graphics);
             }
 
             graphics.DrawString(text2, arialFont, Brushes.Black, drawRectTxt);
@@ -421,12 +434,16 @@ namespace ChaosGalaxyProfileMaker
             float savedHeight = drawRectTxt.Height;
 
             SizeF size2 = graphics.MeasureString(text, arialFont);
-            Console.WriteLine(size2);
 
             int nblines = (int)(size2.Height / drawRectTxt.Height);
+            //while(size2.Width> drawRectTxt.Width/4)
+            //{
+            //    size2.Width -= drawRectTxt.Width;
+            //    nblines += 1;
+            //}
             nblines += (int)(size2.Width / drawRectTxt.Width);
 
-            drawRectTxt.Height = nblines*16;
+            drawRectTxt.Height = nblines* savedHeight;
 
             graphics.DrawString(text, arialFont, Brushes.Black, drawRectTxt);
             drawRectTxt.Y += drawRectTxt.Height;
