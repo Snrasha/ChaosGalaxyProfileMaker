@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
@@ -363,19 +364,31 @@ namespace ChaosGalaxyProfileMaker
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
-            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.V)
+            IInputElement elementWithFocus = Keyboard.FocusedElement;
+
+            if (!(elementWithFocus is TextBox))
             {
-                OnClickExport(null, null);
-            }
-            else if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.D)
-            {
-                OnClickEdit(null, null); 
-            }
-            else if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.S)
-            {
-                OnClickSave(null, null);
+                if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.V)
+                {
+                    OnClickExport(null, null);
+                }
+                else if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.D)
+                {
+                    OnClickEdit(null, null);
+                }
+                else if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.S)
+                {
+                    OnClickSave(null, null);
+                }
             }
             else if (Keyboard.Modifiers == ModifierKeys.None && e.Key == Key.Escape)
+            {
+                Keyboard.ClearFocus();
+                FocusManager.SetFocusedElement(this, this);
+                this.Focus();
+            }
+
+            else if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.Escape)
             {
                 this.Close();
             }
