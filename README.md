@@ -1,4 +1,6 @@
-# Chaos Maker Profile Maker
+# Chaos Galaxy Profile Maker
+Chaos Galaxy 2 is a game where the modding begin to be added. Pre-emptively, i have create this tool for help me.
+
 Create a formatted page preview of your hero with the unit.
 
 Press Ctrl+D for edit a save of your page preview data.
